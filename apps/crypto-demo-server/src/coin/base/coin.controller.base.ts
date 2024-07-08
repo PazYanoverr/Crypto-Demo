@@ -405,4 +405,21 @@ export class CoinControllerBase {
       select: { id: true },
     });
   }
+
+  @common.Get("/:id/get-total-coin-value")
+  @swagger.ApiOkResponse({
+    type: String,
+  })
+  @swagger.ApiNotFoundResponse({
+    type: errors.NotFoundException,
+  })
+  @swagger.ApiForbiddenResponse({
+    type: errors.ForbiddenException,
+  })
+  async GetTotalCoinValue(
+    @common.Param()
+    params: string
+  ): Promise<string> {
+    return this.service.GetTotalCoinValue(params);
+  }
 }

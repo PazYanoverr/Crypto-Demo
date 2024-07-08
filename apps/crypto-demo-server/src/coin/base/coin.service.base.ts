@@ -74,4 +74,7 @@ export class CoinServiceBase {
       })
       .marketDataItems(args);
   }
+  async GetTotalCoinValue(args: string): Promise<string> {
+    throw new Error("Not implemented");
+  }
 }
