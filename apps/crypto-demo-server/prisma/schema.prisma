@@ -1,0 +1,55 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Coin {
+  id              String           @id @default(cuid())
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  name            String?
+  symbolField     String?
+  description     String?
+  analysisReports AnalysisReport[]
+  transactions    Transaction[]
+  marketDataItems MarketData[]
+  currency        Int?
+}
+
+model Transaction {
+  id              String    @id @default(cuid())
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  amount          Float?
+  transactionType String?
+  transactionDate DateTime?
+  coin            Coin?     @relation(fields: [coinId], references: [id])
+  coinId          String?
+}
+
+model MarketData {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  marketCap Float?
+  timestamp DateTime?
+  price     Float?
+  volume    Int?
+  coin      Coin?     @relation(fields: [coinId], references: [id])
+  coinId    String?
+}
+
+model AnalysisReport {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  analyst   String?
+  createdOn DateTime?
+  report    String?
+  coin      Coin?     @relation(fields: [coinId], references: [id])
+  coinId    String?
+}
