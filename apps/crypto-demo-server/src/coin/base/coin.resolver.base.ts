@@ -134,4 +134,12 @@ export class CoinResolverBase {
 
     return results;
   }
+
+  @graphql.Query(() => String)
+  async GetTotalCoinValue(
+    @graphql.Args()
+    args: string
+  ): Promise<string> {
+    return this.service.GetTotalCoinValue(args);
+  }
 }
