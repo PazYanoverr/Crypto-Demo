@@ -14,7 +14,6 @@ import { PrismaService } from "../../prisma/prisma.service";
 import {
   Prisma,
   Coin as PrismaCoin,
-  AnalysisReport as PrismaAnalysisReport,
   MarketData as PrismaMarketData,
   Transaction as PrismaTransaction,
 } from "@prisma/client";
@@ -40,17 +39,6 @@ export class CoinServiceBase {
   }
   async deleteCoin(args: Prisma.CoinDeleteArgs): Promise<PrismaCoin> {
     return this.prisma.coin.delete(args);
-  }
-
-  async findAnalysisReports(
-    parentId: string,
-    args: Prisma.AnalysisReportFindManyArgs
-  ): Promise<PrismaAnalysisReport[]> {
-    return this.prisma.coin
-      .findUniqueOrThrow({
-        where: { id: parentId },
-      })
-      .analysisReports(args);
   }
 
   async findMarketDataItems(

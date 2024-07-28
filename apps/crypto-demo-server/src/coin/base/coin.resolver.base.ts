@@ -20,8 +20,6 @@ import { CoinFindUniqueArgs } from "./CoinFindUniqueArgs";
 import { CreateCoinArgs } from "./CreateCoinArgs";
 import { UpdateCoinArgs } from "./UpdateCoinArgs";
 import { DeleteCoinArgs } from "./DeleteCoinArgs";
-import { AnalysisReportFindManyArgs } from "../../analysisReport/base/AnalysisReportFindManyArgs";
-import { AnalysisReport } from "../../analysisReport/base/AnalysisReport";
 import { MarketDataFindManyArgs } from "../../marketData/base/MarketDataFindManyArgs";
 import { MarketData } from "../../marketData/base/MarketData";
 import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
@@ -91,20 +89,6 @@ export class CoinResolverBase {
       }
       throw error;
     }
-  }
-
-  @graphql.ResolveField(() => [AnalysisReport], { name: "analysisReports" })
-  async findAnalysisReports(
-    @graphql.Parent() parent: Coin,
-    @graphql.Args() args: AnalysisReportFindManyArgs
-  ): Promise<AnalysisReport[]> {
-    const results = await this.service.findAnalysisReports(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
   }
 
   @graphql.ResolveField(() => [MarketData], { name: "marketDataItems" })

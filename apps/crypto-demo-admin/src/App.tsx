@@ -17,10 +17,6 @@ import { MarketDataList } from "./marketData/MarketDataList";
 import { MarketDataCreate } from "./marketData/MarketDataCreate";
 import { MarketDataEdit } from "./marketData/MarketDataEdit";
 import { MarketDataShow } from "./marketData/MarketDataShow";
-import { AnalysisReportList } from "./analysisReport/AnalysisReportList";
-import { AnalysisReportCreate } from "./analysisReport/AnalysisReportCreate";
-import { AnalysisReportEdit } from "./analysisReport/AnalysisReportEdit";
-import { AnalysisReportShow } from "./analysisReport/AnalysisReportShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -67,13 +63,6 @@ const App = (): React.ReactElement => {
           edit={MarketDataEdit}
           create={MarketDataCreate}
           show={MarketDataShow}
-        />
-        <Resource
-          name="AnalysisReport"
-          list={AnalysisReportList}
-          edit={AnalysisReportEdit}
-          create={AnalysisReportCreate}
-          show={AnalysisReportShow}
         />
       </Admin>
     </div>

@@ -8,16 +8,15 @@ generator client {
 }
 
 model Coin {
-  analysisReports AnalysisReport[]
-  createdAt       DateTime         @default(now())
+  createdAt       DateTime      @default(now())
   currency        Int?
   description     String?
-  id              String           @id @default(cuid())
+  id              String        @id @default(cuid())
   marketDataItems MarketData[]
   name            String?
   symbolField     String?
   transactions    Transaction[]
-  updatedAt       DateTime         @updatedAt
+  updatedAt       DateTime      @updatedAt
 }
 
 model Transaction {
@@ -41,15 +40,4 @@ model MarketData {
   timestamp DateTime?
   updatedAt DateTime  @updatedAt
   volume    Int?
-}
-
-model AnalysisReport {
-  analyst   String?
-  coin      Coin?     @relation(fields: [coinId], references: [id])
-  coinId    String?
-  createdAt DateTime  @default(now())
-  createdOn DateTime?
-  id        String    @id @default(cuid())
-  report    String?
-  updatedAt DateTime  @updatedAt
 }

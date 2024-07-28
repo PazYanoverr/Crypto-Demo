@@ -1,9 +1,7 @@
-import { AnalysisReport } from "../analysisReport/AnalysisReport";
 import { MarketData } from "../marketData/MarketData";
 import { Transaction } from "../transaction/Transaction";
 
 export type Coin = {
-  analysisReports?: Array<AnalysisReport>;
   createdAt: Date;
   currency: number | null;
   description: string | null;

@@ -11,33 +11,20 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AnalysisReportUpdateManyWithoutCoinsInput } from "./AnalysisReportUpdateManyWithoutCoinsInput";
 import {
-  ValidateNested,
-  IsOptional,
   IsInt,
   Max,
+  IsOptional,
   IsString,
   MaxLength,
+  ValidateNested,
 } from "class-validator";
-import { Type } from "class-transformer";
 import { MarketDataUpdateManyWithoutCoinsInput } from "./MarketDataUpdateManyWithoutCoinsInput";
+import { Type } from "class-transformer";
 import { TransactionUpdateManyWithoutCoinsInput } from "./TransactionUpdateManyWithoutCoinsInput";
 
 @InputType()
 class CoinUpdateInput {
-  @ApiProperty({
-    required: false,
-    type: () => AnalysisReportUpdateManyWithoutCoinsInput,
-  })
-  @ValidateNested()
-  @Type(() => AnalysisReportUpdateManyWithoutCoinsInput)
-  @IsOptional()
-  @Field(() => AnalysisReportUpdateManyWithoutCoinsInput, {
-    nullable: true,
-  })
-  analysisReports?: AnalysisReportUpdateManyWithoutCoinsInput;
-
   @ApiProperty({
     required: false,
     type: Number,

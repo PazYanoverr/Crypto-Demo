@@ -11,15 +11,14 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { AnalysisReport } from "../../analysisReport/base/AnalysisReport";
 import {
-  ValidateNested,
-  IsOptional,
   IsDate,
   IsInt,
   Max,
+  IsOptional,
   IsString,
   MaxLength,
+  ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { MarketData } from "../../marketData/base/MarketData";
@@ -27,15 +26,6 @@ import { Transaction } from "../../transaction/base/Transaction";
 
 @ObjectType()
 class Coin {
-  @ApiProperty({
-    required: false,
-    type: () => [AnalysisReport],
-  })
-  @ValidateNested()
-  @Type(() => AnalysisReport)
-  @IsOptional()
-  analysisReports?: Array<AnalysisReport>;
-
   @ApiProperty({
     required: true,
   })

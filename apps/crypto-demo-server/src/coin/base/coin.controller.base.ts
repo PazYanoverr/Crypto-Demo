@@ -22,9 +22,6 @@ import { Coin } from "./Coin";
 import { CoinFindManyArgs } from "./CoinFindManyArgs";
 import { CoinWhereUniqueInput } from "./CoinWhereUniqueInput";
 import { CoinUpdateInput } from "./CoinUpdateInput";
-import { AnalysisReportFindManyArgs } from "../../analysisReport/base/AnalysisReportFindManyArgs";
-import { AnalysisReport } from "../../analysisReport/base/AnalysisReport";
-import { AnalysisReportWhereUniqueInput } from "../../analysisReport/base/AnalysisReportWhereUniqueInput";
 import { MarketDataFindManyArgs } from "../../marketData/base/MarketDataFindManyArgs";
 import { MarketData } from "../../marketData/base/MarketData";
 import { MarketDataWhereUniqueInput } from "../../marketData/base/MarketDataWhereUniqueInput";
@@ -154,90 +151,6 @@ export class CoinControllerBase {
       }
       throw error;
     }
-  }
-
-  @common.Get("/:id/analysisReports")
-  @ApiNestedQuery(AnalysisReportFindManyArgs)
-  async findAnalysisReports(
-    @common.Req() request: Request,
-    @common.Param() params: CoinWhereUniqueInput
-  ): Promise<AnalysisReport[]> {
-    const query = plainToClass(AnalysisReportFindManyArgs, request.query);
-    const results = await this.service.findAnalysisReports(params.id, {
-      ...query,
-      select: {
-        analyst: true,
-
-        coin: {
-          select: {
-            id: true,
-          },
-        },
-
-        createdAt: true,
-        createdOn: true,
-        id: true,
-        report: true,
-        updatedAt: true,
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @common.Post("/:id/analysisReports")
-  async connectAnalysisReports(
-    @common.Param() params: CoinWhereUniqueInput,
-    @common.Body() body: AnalysisReportWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      analysisReports: {
-        connect: body,
-      },
-    };
-    await this.service.updateCoin({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Patch("/:id/analysisReports")
-  async updateAnalysisReports(
-    @common.Param() params: CoinWhereUniqueInput,
-    @common.Body() body: AnalysisReportWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      analysisReports: {
-        set: body,
-      },
-    };
-    await this.service.updateCoin({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Delete("/:id/analysisReports")
-  async disconnectAnalysisReports(
-    @common.Param() params: CoinWhereUniqueInput,
-    @common.Body() body: AnalysisReportWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      analysisReports: {
-        disconnect: body,
-      },
-    };
-    await this.service.updateCoin({
-      where: params,
-      data,
-      select: { id: true },
-    });
   }
 
   @common.Get("/:id/marketDataItems")
