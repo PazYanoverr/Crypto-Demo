@@ -19,9 +19,8 @@ import {
   MaxLength,
   ValidateNested,
 } from "class-validator";
-import { MarketDataCreateNestedManyWithoutCoinsInput } from "./MarketDataCreateNestedManyWithoutCoinsInput";
-import { Type } from "class-transformer";
 import { TransactionCreateNestedManyWithoutCoinsInput } from "./TransactionCreateNestedManyWithoutCoinsInput";
+import { Type } from "class-transformer";
 
 @InputType()
 class CoinCreateInput {
@@ -48,18 +47,6 @@ class CoinCreateInput {
     nullable: true,
   })
   description?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => MarketDataCreateNestedManyWithoutCoinsInput,
-  })
-  @ValidateNested()
-  @Type(() => MarketDataCreateNestedManyWithoutCoinsInput)
-  @IsOptional()
-  @Field(() => MarketDataCreateNestedManyWithoutCoinsInput, {
-    nullable: true,
-  })
-  marketDataItems?: MarketDataCreateNestedManyWithoutCoinsInput;
 
   @ApiProperty({
     required: false,

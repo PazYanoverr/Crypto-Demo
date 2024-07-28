@@ -10,11 +10,9 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-
 import {
   Prisma,
   Coin as PrismaCoin,
-  MarketData as PrismaMarketData,
   Transaction as PrismaTransaction,
 } from "@prisma/client";
 
@@ -39,17 +37,6 @@ export class CoinServiceBase {
   }
   async deleteCoin(args: Prisma.CoinDeleteArgs): Promise<PrismaCoin> {
     return this.prisma.coin.delete(args);
-  }
-
-  async findMarketDataItems(
-    parentId: string,
-    args: Prisma.MarketDataFindManyArgs
-  ): Promise<PrismaMarketData[]> {
-    return this.prisma.coin
-      .findUniqueOrThrow({
-        where: { id: parentId },
-      })
-      .marketDataItems(args);
   }
 
   async findTransactions(

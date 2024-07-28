@@ -19,9 +19,8 @@ import {
   MaxLength,
   ValidateNested,
 } from "class-validator";
-import { MarketDataUpdateManyWithoutCoinsInput } from "./MarketDataUpdateManyWithoutCoinsInput";
-import { Type } from "class-transformer";
 import { TransactionUpdateManyWithoutCoinsInput } from "./TransactionUpdateManyWithoutCoinsInput";
+import { Type } from "class-transformer";
 
 @InputType()
 class CoinUpdateInput {
@@ -48,18 +47,6 @@ class CoinUpdateInput {
     nullable: true,
   })
   description?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => MarketDataUpdateManyWithoutCoinsInput,
-  })
-  @ValidateNested()
-  @Type(() => MarketDataUpdateManyWithoutCoinsInput)
-  @IsOptional()
-  @Field(() => MarketDataUpdateManyWithoutCoinsInput, {
-    nullable: true,
-  })
-  marketDataItems?: MarketDataUpdateManyWithoutCoinsInput;
 
   @ApiProperty({
     required: false,

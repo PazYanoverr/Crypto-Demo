@@ -25,24 +25,6 @@ export const CoinShow = (props: ShowProps): React.ReactElement => {
         <TextField label="symbol" source="symbolField" />
         <DateField source="updatedAt" label="Updated At" />
         <ReferenceManyField
-          reference="MarketData"
-          target="coinId"
-          label="MarketDataItems"
-        >
-          <Datagrid rowClick="show">
-            <ReferenceField label="coin" source="coin.id" reference="Coin">
-              <TextField source={COIN_TITLE_FIELD} />
-            </ReferenceField>
-            <DateField source="createdAt" label="Created At" />
-            <TextField label="ID" source="id" />
-            <TextField label="marketCap" source="marketCap" />
-            <TextField label="price" source="price" />
-            <TextField label="timestamp" source="timestamp" />
-            <DateField source="updatedAt" label="Updated At" />
-            <TextField label="volume" source="volume" />
-          </Datagrid>
-        </ReferenceManyField>
-        <ReferenceManyField
           reference="Transaction"
           target="coinId"
           label="Transactions"

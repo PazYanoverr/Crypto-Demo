@@ -16,7 +16,6 @@ import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
-import { MarketDataListRelationFilter } from "../../marketData/base/MarketDataListRelationFilter";
 import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
 @InputType()
@@ -53,18 +52,6 @@ class CoinWhereInput {
     nullable: true,
   })
   id?: StringFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => MarketDataListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => MarketDataListRelationFilter)
-  @IsOptional()
-  @Field(() => MarketDataListRelationFilter, {
-    nullable: true,
-  })
-  marketDataItems?: MarketDataListRelationFilter;
 
   @ApiProperty({
     required: false,

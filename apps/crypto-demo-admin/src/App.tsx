@@ -13,10 +13,6 @@ import { TransactionList } from "./transaction/TransactionList";
 import { TransactionCreate } from "./transaction/TransactionCreate";
 import { TransactionEdit } from "./transaction/TransactionEdit";
 import { TransactionShow } from "./transaction/TransactionShow";
-import { MarketDataList } from "./marketData/MarketDataList";
-import { MarketDataCreate } from "./marketData/MarketDataCreate";
-import { MarketDataEdit } from "./marketData/MarketDataEdit";
-import { MarketDataShow } from "./marketData/MarketDataShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -56,13 +52,6 @@ const App = (): React.ReactElement => {
           edit={TransactionEdit}
           create={TransactionCreate}
           show={TransactionShow}
-        />
-        <Resource
-          name="MarketData"
-          list={MarketDataList}
-          edit={MarketDataEdit}
-          create={MarketDataCreate}
-          show={MarketDataShow}
         />
       </Admin>
     </div>

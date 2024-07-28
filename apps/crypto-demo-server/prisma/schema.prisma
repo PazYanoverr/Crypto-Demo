@@ -8,15 +8,14 @@ generator client {
 }
 
 model Coin {
-  createdAt       DateTime      @default(now())
-  currency        Int?
-  description     String?
-  id              String        @id @default(cuid())
-  marketDataItems MarketData[]
-  name            String?
-  symbolField     String?
-  transactions    Transaction[]
-  updatedAt       DateTime      @updatedAt
+  createdAt    DateTime      @default(now())
+  currency     Int?
+  description  String?
+  id           String        @id @default(cuid())
+  name         String?
+  symbolField  String?
+  transactions Transaction[]
+  updatedAt    DateTime      @updatedAt
 }
 
 model Transaction {
@@ -28,16 +27,4 @@ model Transaction {
   transactionDate DateTime?
   transactionType String?
   updatedAt       DateTime  @updatedAt
-}
-
-model MarketData {
-  coin      Coin?     @relation(fields: [coinId], references: [id])
-  coinId    String?
-  createdAt DateTime  @default(now())
-  id        String    @id @default(cuid())
-  marketCap Float?
-  price     Float?
-  timestamp DateTime?
-  updatedAt DateTime  @updatedAt
-  volume    Int?
 }

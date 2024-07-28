@@ -21,7 +21,6 @@ import {
   ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { MarketData } from "../../marketData/base/MarketData";
 import { Transaction } from "../../transaction/base/Transaction";
 
 @ObjectType()
@@ -65,15 +64,6 @@ class Coin {
   @IsString()
   @Field(() => String)
   id!: string;
-
-  @ApiProperty({
-    required: false,
-    type: () => [MarketData],
-  })
-  @ValidateNested()
-  @Type(() => MarketData)
-  @IsOptional()
-  marketDataItems?: Array<MarketData>;
 
   @ApiProperty({
     required: false,

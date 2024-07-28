@@ -22,9 +22,6 @@ import { Coin } from "./Coin";
 import { CoinFindManyArgs } from "./CoinFindManyArgs";
 import { CoinWhereUniqueInput } from "./CoinWhereUniqueInput";
 import { CoinUpdateInput } from "./CoinUpdateInput";
-import { MarketDataFindManyArgs } from "../../marketData/base/MarketDataFindManyArgs";
-import { MarketData } from "../../marketData/base/MarketData";
-import { MarketDataWhereUniqueInput } from "../../marketData/base/MarketDataWhereUniqueInput";
 import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
 import { Transaction } from "../../transaction/base/Transaction";
 import { TransactionWhereUniqueInput } from "../../transaction/base/TransactionWhereUniqueInput";
@@ -151,90 +148,6 @@ export class CoinControllerBase {
       }
       throw error;
     }
-  }
-
-  @common.Get("/:id/marketDataItems")
-  @ApiNestedQuery(MarketDataFindManyArgs)
-  async findMarketDataItems(
-    @common.Req() request: Request,
-    @common.Param() params: CoinWhereUniqueInput
-  ): Promise<MarketData[]> {
-    const query = plainToClass(MarketDataFindManyArgs, request.query);
-    const results = await this.service.findMarketDataItems(params.id, {
-      ...query,
-      select: {
-        coin: {
-          select: {
-            id: true,
-          },
-        },
-
-        createdAt: true,
-        id: true,
-        marketCap: true,
-        price: true,
-        timestamp: true,
-        updatedAt: true,
-        volume: true,
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @common.Post("/:id/marketDataItems")
-  async connectMarketDataItems(
-    @common.Param() params: CoinWhereUniqueInput,
-    @common.Body() body: MarketDataWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      marketDataItems: {
-        connect: body,
-      },
-    };
-    await this.service.updateCoin({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Patch("/:id/marketDataItems")
-  async updateMarketDataItems(
-    @common.Param() params: CoinWhereUniqueInput,
-    @common.Body() body: MarketDataWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      marketDataItems: {
-        set: body,
-      },
-    };
-    await this.service.updateCoin({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Delete("/:id/marketDataItems")
-  async disconnectMarketDataItems(
-    @common.Param() params: CoinWhereUniqueInput,
-    @common.Body() body: MarketDataWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      marketDataItems: {
-        disconnect: body,
-      },
-    };
-    await this.service.updateCoin({
-      where: params,
-      data,
-      select: { id: true },
-    });
   }
 
   @common.Get("/:id/transactions")

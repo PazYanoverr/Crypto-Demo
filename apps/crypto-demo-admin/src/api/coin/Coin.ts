@@ -1,4 +1,3 @@
-import { MarketData } from "../marketData/MarketData";
 import { Transaction } from "../transaction/Transaction";
 
 export type Coin = {
@@ -6,7 +5,6 @@ export type Coin = {
   currency: number | null;
   description: string | null;
   id: string;
-  marketDataItems?: Array<MarketData>;
   name: string | null;
   symbolField: string | null;
   transactions?: Array<Transaction>;
