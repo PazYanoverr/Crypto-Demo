@@ -11,28 +11,29 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { Coin } from "../../coin/base/Coin";
 import {
-  IsString,
+  ValidateNested,
+  IsOptional,
   IsDate,
+  IsString,
   IsNumber,
   Min,
   Max,
-  IsOptional,
   IsInt,
-  ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { Coin } from "../../coin/base/Coin";
 
 @ObjectType()
 class MarketData {
   @ApiProperty({
-    required: true,
-    type: String,
+    required: false,
+    type: () => Coin,
   })
-  @IsString()
-  @Field(() => String)
-  id!: string;
+  @ValidateNested()
+  @Type(() => Coin)
+  @IsOptional()
+  coin?: Coin | null;
 
   @ApiProperty({
     required: true,
@@ -44,11 +45,11 @@ class MarketData {
 
   @ApiProperty({
     required: true,
+    type: String,
   })
-  @IsDate()
-  @Type(() => Date)
-  @Field(() => Date)
-  updatedAt!: Date;
+  @IsString()
+  @Field(() => String)
+  id!: string;
 
   @ApiProperty({
     required: false,
@@ -65,17 +66,6 @@ class MarketData {
 
   @ApiProperty({
     required: false,
-  })
-  @IsDate()
-  @Type(() => Date)
-  @IsOptional()
-  @Field(() => Date, {
-    nullable: true,
-  })
-  timestamp!: Date | null;
-
-  @ApiProperty({
-    required: false,
     type: Number,
   })
   @IsNumber()
@@ -89,6 +79,25 @@ class MarketData {
 
   @ApiProperty({
     required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  timestamp!: Date | null;
+
+  @ApiProperty({
+    required: true,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @Field(() => Date)
+  updatedAt!: Date;
+
+  @ApiProperty({
+    required: false,
     type: Number,
   })
   @IsInt()
@@ -99,15 +108,6 @@ class MarketData {
     nullable: true,
   })
   volume!: number | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => Coin,
-  })
-  @ValidateNested()
-  @Type(() => Coin)
-  @IsOptional()
-  coin?: Coin | null;
 }
 
 export { MarketData as MarketData };

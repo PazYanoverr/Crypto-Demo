@@ -41,18 +41,19 @@ export class AnalysisReportControllerBase {
           : undefined,
       },
       select: {
-        id: true,
-        createdAt: true,
-        updatedAt: true,
         analyst: true,
-        createdOn: true,
-        report: true,
 
         coin: {
           select: {
             id: true,
           },
         },
+
+        createdAt: true,
+        createdOn: true,
+        id: true,
+        report: true,
+        updatedAt: true,
       },
     });
   }
@@ -67,18 +68,19 @@ export class AnalysisReportControllerBase {
     return this.service.analysisReports({
       ...args,
       select: {
-        id: true,
-        createdAt: true,
-        updatedAt: true,
         analyst: true,
-        createdOn: true,
-        report: true,
 
         coin: {
           select: {
             id: true,
           },
         },
+
+        createdAt: true,
+        createdOn: true,
+        id: true,
+        report: true,
+        updatedAt: true,
       },
     });
   }
@@ -92,18 +94,19 @@ export class AnalysisReportControllerBase {
     const result = await this.service.analysisReport({
       where: params,
       select: {
-        id: true,
-        createdAt: true,
-        updatedAt: true,
         analyst: true,
-        createdOn: true,
-        report: true,
 
         coin: {
           select: {
             id: true,
           },
         },
+
+        createdAt: true,
+        createdOn: true,
+        id: true,
+        report: true,
+        updatedAt: true,
       },
     });
     if (result === null) {
@@ -134,18 +137,19 @@ export class AnalysisReportControllerBase {
             : undefined,
         },
         select: {
-          id: true,
-          createdAt: true,
-          updatedAt: true,
           analyst: true,
-          createdOn: true,
-          report: true,
 
           coin: {
             select: {
               id: true,
             },
           },
+
+          createdAt: true,
+          createdOn: true,
+          id: true,
+          report: true,
+          updatedAt: true,
         },
       });
     } catch (error) {
@@ -168,18 +172,19 @@ export class AnalysisReportControllerBase {
       return await this.service.deleteAnalysisReport({
         where: params,
         select: {
-          id: true,
-          createdAt: true,
-          updatedAt: true,
           analyst: true,
-          createdOn: true,
-          report: true,
 
           coin: {
             select: {
               id: true,
             },
           },
+
+          createdAt: true,
+          createdOn: true,
+          id: true,
+          report: true,
+          updatedAt: true,
         },
       });
     } catch (error) {

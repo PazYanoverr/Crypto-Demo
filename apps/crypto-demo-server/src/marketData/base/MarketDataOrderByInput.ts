@@ -28,7 +28,7 @@ class MarketDataOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  id?: SortOrder;
+  coinId?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -50,7 +50,7 @@ class MarketDataOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  updatedAt?: SortOrder;
+  id?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -72,17 +72,6 @@ class MarketDataOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  timestamp?: SortOrder;
-
-  @ApiProperty({
-    required: false,
-    enum: ["asc", "desc"],
-  })
-  @IsOptional()
-  @IsEnum(SortOrder)
-  @Field(() => SortOrder, {
-    nullable: true,
-  })
   price?: SortOrder;
 
   @ApiProperty({
@@ -94,7 +83,7 @@ class MarketDataOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  volume?: SortOrder;
+  timestamp?: SortOrder;
 
   @ApiProperty({
     required: false,
@@ -105,7 +94,18 @@ class MarketDataOrderByInput {
   @Field(() => SortOrder, {
     nullable: true,
   })
-  coinId?: SortOrder;
+  updatedAt?: SortOrder;
+
+  @ApiProperty({
+    required: false,
+    enum: ["asc", "desc"],
+  })
+  @IsOptional()
+  @IsEnum(SortOrder)
+  @Field(() => SortOrder, {
+    nullable: true,
+  })
+  volume?: SortOrder;
 }
 
 export { MarketDataOrderByInput as MarketDataOrderByInput };

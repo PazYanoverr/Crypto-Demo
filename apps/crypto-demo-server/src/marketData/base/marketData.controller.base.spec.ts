@@ -18,41 +18,41 @@ import { MarketDataService } from "../marketData.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
-  id: "exampleId",
   createdAt: new Date(),
-  updatedAt: new Date(),
+  id: "exampleId",
   marketCap: 42.42,
-  timestamp: new Date(),
   price: 42.42,
+  timestamp: new Date(),
+  updatedAt: new Date(),
   volume: 42,
 };
 const CREATE_RESULT = {
-  id: "exampleId",
   createdAt: new Date(),
-  updatedAt: new Date(),
+  id: "exampleId",
   marketCap: 42.42,
-  timestamp: new Date(),
   price: 42.42,
+  timestamp: new Date(),
+  updatedAt: new Date(),
   volume: 42,
 };
 const FIND_MANY_RESULT = [
   {
-    id: "exampleId",
     createdAt: new Date(),
-    updatedAt: new Date(),
+    id: "exampleId",
     marketCap: 42.42,
-    timestamp: new Date(),
     price: 42.42,
+    timestamp: new Date(),
+    updatedAt: new Date(),
     volume: 42,
   },
 ];
 const FIND_ONE_RESULT = {
-  id: "exampleId",
   createdAt: new Date(),
-  updatedAt: new Date(),
+  id: "exampleId",
   marketCap: 42.42,
-  timestamp: new Date(),
   price: 42.42,
+  timestamp: new Date(),
+  updatedAt: new Date(),
   volume: 42,
 };
 
@@ -139,8 +139,8 @@ describe("MarketData", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
-        updatedAt: CREATE_RESULT.updatedAt.toISOString(),
         timestamp: CREATE_RESULT.timestamp.toISOString(),
+        updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       });
   });
 
@@ -152,8 +152,8 @@ describe("MarketData", () => {
         {
           ...FIND_MANY_RESULT[0],
           createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
-          updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
           timestamp: FIND_MANY_RESULT[0].timestamp.toISOString(),
+          updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
         },
       ]);
   });
@@ -176,8 +176,8 @@ describe("MarketData", () => {
       .expect({
         ...FIND_ONE_RESULT,
         createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
-        updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
         timestamp: FIND_ONE_RESULT.timestamp.toISOString(),
+        updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
       });
   });
 
@@ -190,8 +190,8 @@ describe("MarketData", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
-        updatedAt: CREATE_RESULT.updatedAt.toISOString(),
         timestamp: CREATE_RESULT.timestamp.toISOString(),
+        updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       })
       .then(function () {
         agent

@@ -15,8 +15,8 @@ import {
   Prisma,
   Coin as PrismaCoin,
   AnalysisReport as PrismaAnalysisReport,
-  Transaction as PrismaTransaction,
   MarketData as PrismaMarketData,
+  Transaction as PrismaTransaction,
 } from "@prisma/client";
 
 export class CoinServiceBase {
@@ -53,17 +53,6 @@ export class CoinServiceBase {
       .analysisReports(args);
   }
 
-  async findTransactions(
-    parentId: string,
-    args: Prisma.TransactionFindManyArgs
-  ): Promise<PrismaTransaction[]> {
-    return this.prisma.coin
-      .findUniqueOrThrow({
-        where: { id: parentId },
-      })
-      .transactions(args);
-  }
-
   async findMarketDataItems(
     parentId: string,
     args: Prisma.MarketDataFindManyArgs
@@ -73,6 +62,17 @@ export class CoinServiceBase {
         where: { id: parentId },
       })
       .marketDataItems(args);
+  }
+
+  async findTransactions(
+    parentId: string,
+    args: Prisma.TransactionFindManyArgs
+  ): Promise<PrismaTransaction[]> {
+    return this.prisma.coin
+      .findUniqueOrThrow({
+        where: { id: parentId },
+      })
+      .transactions(args);
   }
   async GetTotalCoinValue(args: string): Promise<string> {
     throw new Error("Not implemented");

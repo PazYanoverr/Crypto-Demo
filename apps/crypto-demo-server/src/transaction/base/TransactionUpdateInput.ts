@@ -17,14 +17,14 @@ import {
   Min,
   Max,
   IsOptional,
+  ValidateNested,
+  IsDate,
   IsString,
   MaxLength,
-  IsDate,
-  ValidateNested,
 } from "class-validator";
 
-import { Type } from "class-transformer";
 import { CoinWhereUniqueInput } from "../../coin/base/CoinWhereUniqueInput";
+import { Type } from "class-transformer";
 
 @InputType()
 class TransactionUpdateInput {
@@ -43,15 +43,15 @@ class TransactionUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: () => CoinWhereUniqueInput,
   })
-  @IsString()
-  @MaxLength(1000)
+  @ValidateNested()
+  @Type(() => CoinWhereUniqueInput)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => CoinWhereUniqueInput, {
     nullable: true,
   })
-  transactionType?: string | null;
+  coin?: CoinWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,
@@ -66,15 +66,15 @@ class TransactionUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: () => CoinWhereUniqueInput,
+    type: String,
   })
-  @ValidateNested()
-  @Type(() => CoinWhereUniqueInput)
+  @IsString()
+  @MaxLength(1000)
   @IsOptional()
-  @Field(() => CoinWhereUniqueInput, {
+  @Field(() => String, {
     nullable: true,
   })
-  coin?: CoinWhereUniqueInput | null;
+  transactionType?: string | null;
 }
 
 export { TransactionUpdateInput as TransactionUpdateInput };

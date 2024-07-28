@@ -4,8 +4,8 @@ import {
   Show,
   SimpleShowLayout,
   ShowProps,
-  TextField,
   DateField,
+  TextField,
   ReferenceManyField,
   Datagrid,
   ReferenceField,
@@ -17,45 +17,28 @@ export const CoinShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
-        <TextField label="ID" source="id" />
         <DateField source="createdAt" label="Created At" />
-        <DateField source="updatedAt" label="Updated At" />
+        <TextField label="Currency" source="currency" />
+        <TextField label="description" source="description" />
+        <TextField label="ID" source="id" />
         <TextField label="name" source="name" />
         <TextField label="symbol" source="symbolField" />
-        <TextField label="description" source="description" />
-        <TextField label="Currency" source="currency" />
+        <DateField source="updatedAt" label="Updated At" />
         <ReferenceManyField
           reference="AnalysisReport"
           target="coinId"
           label="AnalysisReports"
         >
           <Datagrid rowClick="show">
-            <TextField label="ID" source="id" />
-            <DateField source="createdAt" label="Created At" />
-            <DateField source="updatedAt" label="Updated At" />
             <TextField label="analyst" source="analyst" />
-            <TextField label="createdOn" source="createdOn" />
-            <TextField label="report" source="report" />
             <ReferenceField label="coin" source="coin.id" reference="Coin">
               <TextField source={COIN_TITLE_FIELD} />
             </ReferenceField>
-          </Datagrid>
-        </ReferenceManyField>
-        <ReferenceManyField
-          reference="Transaction"
-          target="coinId"
-          label="Transactions"
-        >
-          <Datagrid rowClick="show">
-            <TextField label="ID" source="id" />
             <DateField source="createdAt" label="Created At" />
+            <TextField label="createdOn" source="createdOn" />
+            <TextField label="ID" source="id" />
+            <TextField label="report" source="report" />
             <DateField source="updatedAt" label="Updated At" />
-            <TextField label="amount" source="amount" />
-            <TextField label="transactionType" source="transactionType" />
-            <TextField label="transactionDate" source="transactionDate" />
-            <ReferenceField label="coin" source="coin.id" reference="Coin">
-              <TextField source={COIN_TITLE_FIELD} />
-            </ReferenceField>
           </Datagrid>
         </ReferenceManyField>
         <ReferenceManyField
@@ -64,16 +47,33 @@ export const CoinShow = (props: ShowProps): React.ReactElement => {
           label="MarketDataItems"
         >
           <Datagrid rowClick="show">
-            <TextField label="ID" source="id" />
-            <DateField source="createdAt" label="Created At" />
-            <DateField source="updatedAt" label="Updated At" />
-            <TextField label="marketCap" source="marketCap" />
-            <TextField label="timestamp" source="timestamp" />
-            <TextField label="price" source="price" />
-            <TextField label="volume" source="volume" />
             <ReferenceField label="coin" source="coin.id" reference="Coin">
               <TextField source={COIN_TITLE_FIELD} />
             </ReferenceField>
+            <DateField source="createdAt" label="Created At" />
+            <TextField label="ID" source="id" />
+            <TextField label="marketCap" source="marketCap" />
+            <TextField label="price" source="price" />
+            <TextField label="timestamp" source="timestamp" />
+            <DateField source="updatedAt" label="Updated At" />
+            <TextField label="volume" source="volume" />
+          </Datagrid>
+        </ReferenceManyField>
+        <ReferenceManyField
+          reference="Transaction"
+          target="coinId"
+          label="Transactions"
+        >
+          <Datagrid rowClick="show">
+            <TextField label="amount" source="amount" />
+            <ReferenceField label="coin" source="coin.id" reference="Coin">
+              <TextField source={COIN_TITLE_FIELD} />
+            </ReferenceField>
+            <DateField source="createdAt" label="Created At" />
+            <TextField label="ID" source="id" />
+            <TextField label="transactionDate" source="transactionDate" />
+            <TextField label="transactionType" source="transactionType" />
+            <DateField source="updatedAt" label="Updated At" />
           </Datagrid>
         </ReferenceManyField>
       </SimpleShowLayout>

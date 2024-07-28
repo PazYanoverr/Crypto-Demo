@@ -11,17 +11,51 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringFilter } from "../../util/StringFilter";
-import { Type } from "class-transformer";
-import { IsOptional, ValidateNested } from "class-validator";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { AnalysisReportListRelationFilter } from "../../analysisReport/base/AnalysisReportListRelationFilter";
-import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
-import { MarketDataListRelationFilter } from "../../marketData/base/MarketDataListRelationFilter";
+import { ValidateNested, IsOptional } from "class-validator";
+import { Type } from "class-transformer";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { StringFilter } from "../../util/StringFilter";
+import { MarketDataListRelationFilter } from "../../marketData/base/MarketDataListRelationFilter";
+import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
 @InputType()
 class CoinWhereInput {
+  @ApiProperty({
+    required: false,
+    type: () => AnalysisReportListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => AnalysisReportListRelationFilter)
+  @IsOptional()
+  @Field(() => AnalysisReportListRelationFilter, {
+    nullable: true,
+  })
+  analysisReports?: AnalysisReportListRelationFilter;
+
+  @ApiProperty({
+    required: false,
+    type: IntNullableFilter,
+  })
+  @Type(() => IntNullableFilter)
+  @IsOptional()
+  @Field(() => IntNullableFilter, {
+    nullable: true,
+  })
+  currency?: IntNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  description?: StringNullableFilter;
+
   @ApiProperty({
     required: false,
     type: StringFilter,
@@ -32,6 +66,18 @@ class CoinWhereInput {
     nullable: true,
   })
   id?: StringFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => MarketDataListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => MarketDataListRelationFilter)
+  @IsOptional()
+  @Field(() => MarketDataListRelationFilter, {
+    nullable: true,
+  })
+  marketDataItems?: MarketDataListRelationFilter;
 
   @ApiProperty({
     required: false,
@@ -57,29 +103,6 @@ class CoinWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
-  })
-  @Type(() => StringNullableFilter)
-  @IsOptional()
-  @Field(() => StringNullableFilter, {
-    nullable: true,
-  })
-  description?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => AnalysisReportListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => AnalysisReportListRelationFilter)
-  @IsOptional()
-  @Field(() => AnalysisReportListRelationFilter, {
-    nullable: true,
-  })
-  analysisReports?: AnalysisReportListRelationFilter;
-
-  @ApiProperty({
-    required: false,
     type: () => TransactionListRelationFilter,
   })
   @ValidateNested()
@@ -89,29 +112,6 @@ class CoinWhereInput {
     nullable: true,
   })
   transactions?: TransactionListRelationFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => MarketDataListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => MarketDataListRelationFilter)
-  @IsOptional()
-  @Field(() => MarketDataListRelationFilter, {
-    nullable: true,
-  })
-  marketDataItems?: MarketDataListRelationFilter;
-
-  @ApiProperty({
-    required: false,
-    type: IntNullableFilter,
-  })
-  @Type(() => IntNullableFilter)
-  @IsOptional()
-  @Field(() => IntNullableFilter, {
-    nullable: true,
-  })
-  currency?: IntNullableFilter;
 }
 
 export { CoinWhereInput as CoinWhereInput };

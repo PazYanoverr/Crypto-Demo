@@ -5,10 +5,10 @@ import {
   SimpleForm,
   CreateProps,
   NumberInput,
-  TextInput,
-  DateTimeInput,
   ReferenceInput,
   SelectInput,
+  DateTimeInput,
+  TextInput,
 } from "react-admin";
 
 import { CoinTitle } from "../coin/CoinTitle";
@@ -18,11 +18,11 @@ export const TransactionCreate = (props: CreateProps): React.ReactElement => {
     <Create {...props}>
       <SimpleForm>
         <NumberInput label="amount" source="amount" />
-        <TextInput label="transactionType" source="transactionType" />
-        <DateTimeInput label="transactionDate" source="transactionDate" />
         <ReferenceInput source="coin.id" reference="Coin" label="coin">
           <SelectInput optionText={CoinTitle} />
         </ReferenceInput>
+        <DateTimeInput label="transactionDate" source="transactionDate" />
+        <TextInput label="transactionType" source="transactionType" />
       </SimpleForm>
     </Create>
   );

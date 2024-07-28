@@ -13,40 +13,16 @@ import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import {
   IsString,
-  IsDate,
   MaxLength,
   IsOptional,
   ValidateNested,
+  IsDate,
 } from "class-validator";
-import { Type } from "class-transformer";
 import { Coin } from "../../coin/base/Coin";
+import { Type } from "class-transformer";
 
 @ObjectType()
 class AnalysisReport {
-  @ApiProperty({
-    required: true,
-    type: String,
-  })
-  @IsString()
-  @Field(() => String)
-  id!: string;
-
-  @ApiProperty({
-    required: true,
-  })
-  @IsDate()
-  @Type(() => Date)
-  @Field(() => Date)
-  createdAt!: Date;
-
-  @ApiProperty({
-    required: true,
-  })
-  @IsDate()
-  @Type(() => Date)
-  @Field(() => Date)
-  updatedAt!: Date;
-
   @ApiProperty({
     required: false,
     type: String,
@@ -61,6 +37,23 @@ class AnalysisReport {
 
   @ApiProperty({
     required: false,
+    type: () => Coin,
+  })
+  @ValidateNested()
+  @Type(() => Coin)
+  @IsOptional()
+  coin?: Coin | null;
+
+  @ApiProperty({
+    required: true,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @Field(() => Date)
+  createdAt!: Date;
+
+  @ApiProperty({
+    required: false,
   })
   @IsDate()
   @Type(() => Date)
@@ -69,6 +62,14 @@ class AnalysisReport {
     nullable: true,
   })
   createdOn!: Date | null;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  id!: string;
 
   @ApiProperty({
     required: false,
@@ -83,13 +84,12 @@ class AnalysisReport {
   report!: string | null;
 
   @ApiProperty({
-    required: false,
-    type: () => Coin,
+    required: true,
   })
-  @ValidateNested()
-  @Type(() => Coin)
-  @IsOptional()
-  coin?: Coin | null;
+  @IsDate()
+  @Type(() => Date)
+  @Field(() => Date)
+  updatedAt!: Date;
 }
 
 export { AnalysisReport as AnalysisReport };

@@ -25,12 +25,12 @@ import { CoinUpdateInput } from "./CoinUpdateInput";
 import { AnalysisReportFindManyArgs } from "../../analysisReport/base/AnalysisReportFindManyArgs";
 import { AnalysisReport } from "../../analysisReport/base/AnalysisReport";
 import { AnalysisReportWhereUniqueInput } from "../../analysisReport/base/AnalysisReportWhereUniqueInput";
-import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
-import { Transaction } from "../../transaction/base/Transaction";
-import { TransactionWhereUniqueInput } from "../../transaction/base/TransactionWhereUniqueInput";
 import { MarketDataFindManyArgs } from "../../marketData/base/MarketDataFindManyArgs";
 import { MarketData } from "../../marketData/base/MarketData";
 import { MarketDataWhereUniqueInput } from "../../marketData/base/MarketDataWhereUniqueInput";
+import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
+import { Transaction } from "../../transaction/base/Transaction";
+import { TransactionWhereUniqueInput } from "../../transaction/base/TransactionWhereUniqueInput";
 
 export class CoinControllerBase {
   constructor(protected readonly service: CoinService) {}
@@ -40,13 +40,13 @@ export class CoinControllerBase {
     return await this.service.createCoin({
       data: data,
       select: {
-        id: true,
         createdAt: true,
-        updatedAt: true,
+        currency: true,
+        description: true,
+        id: true,
         name: true,
         symbolField: true,
-        description: true,
-        currency: true,
+        updatedAt: true,
       },
     });
   }
@@ -59,13 +59,13 @@ export class CoinControllerBase {
     return this.service.coins({
       ...args,
       select: {
-        id: true,
         createdAt: true,
-        updatedAt: true,
+        currency: true,
+        description: true,
+        id: true,
         name: true,
         symbolField: true,
-        description: true,
-        currency: true,
+        updatedAt: true,
       },
     });
   }
@@ -79,13 +79,13 @@ export class CoinControllerBase {
     const result = await this.service.coin({
       where: params,
       select: {
-        id: true,
         createdAt: true,
-        updatedAt: true,
+        currency: true,
+        description: true,
+        id: true,
         name: true,
         symbolField: true,
-        description: true,
-        currency: true,
+        updatedAt: true,
       },
     });
     if (result === null) {
@@ -108,13 +108,13 @@ export class CoinControllerBase {
         where: params,
         data: data,
         select: {
-          id: true,
           createdAt: true,
-          updatedAt: true,
+          currency: true,
+          description: true,
+          id: true,
           name: true,
           symbolField: true,
-          description: true,
-          currency: true,
+          updatedAt: true,
         },
       });
     } catch (error) {
@@ -137,13 +137,13 @@ export class CoinControllerBase {
       return await this.service.deleteCoin({
         where: params,
         select: {
-          id: true,
           createdAt: true,
-          updatedAt: true,
+          currency: true,
+          description: true,
+          id: true,
           name: true,
           symbolField: true,
-          description: true,
-          currency: true,
+          updatedAt: true,
         },
       });
     } catch (error) {
@@ -166,18 +166,19 @@ export class CoinControllerBase {
     const results = await this.service.findAnalysisReports(params.id, {
       ...query,
       select: {
-        id: true,
-        createdAt: true,
-        updatedAt: true,
         analyst: true,
-        createdOn: true,
-        report: true,
 
         coin: {
           select: {
             id: true,
           },
         },
+
+        createdAt: true,
+        createdOn: true,
+        id: true,
+        report: true,
+        updatedAt: true,
       },
     });
     if (results === null) {
@@ -239,89 +240,6 @@ export class CoinControllerBase {
     });
   }
 
-  @common.Get("/:id/transactions")
-  @ApiNestedQuery(TransactionFindManyArgs)
-  async findTransactions(
-    @common.Req() request: Request,
-    @common.Param() params: CoinWhereUniqueInput
-  ): Promise<Transaction[]> {
-    const query = plainToClass(TransactionFindManyArgs, request.query);
-    const results = await this.service.findTransactions(params.id, {
-      ...query,
-      select: {
-        id: true,
-        createdAt: true,
-        updatedAt: true,
-        amount: true,
-        transactionType: true,
-        transactionDate: true,
-
-        coin: {
-          select: {
-            id: true,
-          },
-        },
-      },
-    });
-    if (results === null) {
-      throw new errors.NotFoundException(
-        `No resource was found for ${JSON.stringify(params)}`
-      );
-    }
-    return results;
-  }
-
-  @common.Post("/:id/transactions")
-  async connectTransactions(
-    @common.Param() params: CoinWhereUniqueInput,
-    @common.Body() body: TransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      transactions: {
-        connect: body,
-      },
-    };
-    await this.service.updateCoin({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Patch("/:id/transactions")
-  async updateTransactions(
-    @common.Param() params: CoinWhereUniqueInput,
-    @common.Body() body: TransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      transactions: {
-        set: body,
-      },
-    };
-    await this.service.updateCoin({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
-  @common.Delete("/:id/transactions")
-  async disconnectTransactions(
-    @common.Param() params: CoinWhereUniqueInput,
-    @common.Body() body: TransactionWhereUniqueInput[]
-  ): Promise<void> {
-    const data = {
-      transactions: {
-        disconnect: body,
-      },
-    };
-    await this.service.updateCoin({
-      where: params,
-      data,
-      select: { id: true },
-    });
-  }
-
   @common.Get("/:id/marketDataItems")
   @ApiNestedQuery(MarketDataFindManyArgs)
   async findMarketDataItems(
@@ -332,19 +250,19 @@ export class CoinControllerBase {
     const results = await this.service.findMarketDataItems(params.id, {
       ...query,
       select: {
-        id: true,
-        createdAt: true,
-        updatedAt: true,
-        marketCap: true,
-        timestamp: true,
-        price: true,
-        volume: true,
-
         coin: {
           select: {
             id: true,
           },
         },
+
+        createdAt: true,
+        id: true,
+        marketCap: true,
+        price: true,
+        timestamp: true,
+        updatedAt: true,
+        volume: true,
       },
     });
     if (results === null) {
@@ -396,6 +314,90 @@ export class CoinControllerBase {
   ): Promise<void> {
     const data = {
       marketDataItems: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateCoin({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Get("/:id/transactions")
+  @ApiNestedQuery(TransactionFindManyArgs)
+  async findTransactions(
+    @common.Req() request: Request,
+    @common.Param() params: CoinWhereUniqueInput
+  ): Promise<Transaction[]> {
+    const query = plainToClass(TransactionFindManyArgs, request.query);
+    const results = await this.service.findTransactions(params.id, {
+      ...query,
+      select: {
+        amount: true,
+
+        coin: {
+          select: {
+            id: true,
+          },
+        },
+
+        createdAt: true,
+        id: true,
+        transactionDate: true,
+        transactionType: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/transactions")
+  async connectTransactions(
+    @common.Param() params: CoinWhereUniqueInput,
+    @common.Body() body: TransactionWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      transactions: {
+        connect: body,
+      },
+    };
+    await this.service.updateCoin({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/transactions")
+  async updateTransactions(
+    @common.Param() params: CoinWhereUniqueInput,
+    @common.Body() body: TransactionWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      transactions: {
+        set: body,
+      },
+    };
+    await this.service.updateCoin({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/transactions")
+  async disconnectTransactions(
+    @common.Param() params: CoinWhereUniqueInput,
+    @common.Body() body: TransactionWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      transactions: {
         disconnect: body,
       },
     };

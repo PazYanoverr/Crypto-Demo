@@ -18,38 +18,38 @@ import { AnalysisReportService } from "../analysisReport.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
-  id: "exampleId",
-  createdAt: new Date(),
-  updatedAt: new Date(),
   analyst: "exampleAnalyst",
+  createdAt: new Date(),
   createdOn: new Date(),
+  id: "exampleId",
   report: "exampleReport",
+  updatedAt: new Date(),
 };
 const CREATE_RESULT = {
-  id: "exampleId",
-  createdAt: new Date(),
-  updatedAt: new Date(),
   analyst: "exampleAnalyst",
+  createdAt: new Date(),
   createdOn: new Date(),
+  id: "exampleId",
   report: "exampleReport",
+  updatedAt: new Date(),
 };
 const FIND_MANY_RESULT = [
   {
-    id: "exampleId",
-    createdAt: new Date(),
-    updatedAt: new Date(),
     analyst: "exampleAnalyst",
+    createdAt: new Date(),
     createdOn: new Date(),
+    id: "exampleId",
     report: "exampleReport",
+    updatedAt: new Date(),
   },
 ];
 const FIND_ONE_RESULT = {
-  id: "exampleId",
-  createdAt: new Date(),
-  updatedAt: new Date(),
   analyst: "exampleAnalyst",
+  createdAt: new Date(),
   createdOn: new Date(),
+  id: "exampleId",
   report: "exampleReport",
+  updatedAt: new Date(),
 };
 
 const service = {
@@ -135,8 +135,8 @@ describe("AnalysisReport", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
-        updatedAt: CREATE_RESULT.updatedAt.toISOString(),
         createdOn: CREATE_RESULT.createdOn.toISOString(),
+        updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       });
   });
 
@@ -148,8 +148,8 @@ describe("AnalysisReport", () => {
         {
           ...FIND_MANY_RESULT[0],
           createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
-          updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
           createdOn: FIND_MANY_RESULT[0].createdOn.toISOString(),
+          updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
         },
       ]);
   });
@@ -172,8 +172,8 @@ describe("AnalysisReport", () => {
       .expect({
         ...FIND_ONE_RESULT,
         createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
-        updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
         createdOn: FIND_ONE_RESULT.createdOn.toISOString(),
+        updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
       });
   });
 
@@ -186,8 +186,8 @@ describe("AnalysisReport", () => {
       .expect({
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
-        updatedAt: CREATE_RESULT.updatedAt.toISOString(),
         createdOn: CREATE_RESULT.createdOn.toISOString(),
+        updatedAt: CREATE_RESULT.updatedAt.toISOString(),
       })
       .then(function () {
         agent

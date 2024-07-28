@@ -11,15 +11,49 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringFilter } from "../../util/StringFilter";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
-import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { CoinWhereUniqueInput } from "../../coin/base/CoinWhereUniqueInput";
+import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
+import { StringFilter } from "../../util/StringFilter";
 
 @InputType()
 class AnalysisReportWhereInput {
+  @ApiProperty({
+    required: false,
+    type: StringNullableFilter,
+  })
+  @Type(() => StringNullableFilter)
+  @IsOptional()
+  @Field(() => StringNullableFilter, {
+    nullable: true,
+  })
+  analyst?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => CoinWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => CoinWhereUniqueInput)
+  @IsOptional()
+  @Field(() => CoinWhereUniqueInput, {
+    nullable: true,
+  })
+  coin?: CoinWhereUniqueInput;
+
+  @ApiProperty({
+    required: false,
+    type: DateTimeNullableFilter,
+  })
+  @Type(() => DateTimeNullableFilter)
+  @IsOptional()
+  @Field(() => DateTimeNullableFilter, {
+    nullable: true,
+  })
+  createdOn?: DateTimeNullableFilter;
+
   @ApiProperty({
     required: false,
     type: StringFilter,
@@ -40,41 +74,7 @@ class AnalysisReportWhereInput {
   @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  analyst?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: DateTimeNullableFilter,
-  })
-  @Type(() => DateTimeNullableFilter)
-  @IsOptional()
-  @Field(() => DateTimeNullableFilter, {
-    nullable: true,
-  })
-  createdOn?: DateTimeNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: StringNullableFilter,
-  })
-  @Type(() => StringNullableFilter)
-  @IsOptional()
-  @Field(() => StringNullableFilter, {
-    nullable: true,
-  })
   report?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => CoinWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => CoinWhereUniqueInput)
-  @IsOptional()
-  @Field(() => CoinWhereUniqueInput, {
-    nullable: true,
-  })
-  coin?: CoinWhereUniqueInput;
 }
 
 export { AnalysisReportWhereInput as AnalysisReportWhereInput };

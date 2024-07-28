@@ -5,9 +5,9 @@ import {
   SimpleForm,
   CreateProps,
   TextInput,
-  DateTimeInput,
   ReferenceInput,
   SelectInput,
+  DateTimeInput,
 } from "react-admin";
 
 import { CoinTitle } from "../coin/CoinTitle";
@@ -19,11 +19,11 @@ export const AnalysisReportCreate = (
     <Create {...props}>
       <SimpleForm>
         <TextInput label="analyst" source="analyst" />
-        <DateTimeInput label="createdOn" source="createdOn" />
-        <TextInput label="report" multiline source="report" />
         <ReferenceInput source="coin.id" reference="Coin" label="coin">
           <SelectInput optionText={CoinTitle} />
         </ReferenceInput>
+        <DateTimeInput label="createdOn" source="createdOn" />
+        <TextInput label="report" multiline source="report" />
       </SimpleForm>
     </Create>
   );

@@ -11,21 +11,69 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { AnalysisReportUpdateManyWithoutCoinsInput } from "./AnalysisReportUpdateManyWithoutCoinsInput";
 import {
-  IsString,
-  MaxLength,
-  IsOptional,
   ValidateNested,
+  IsOptional,
   IsInt,
   Max,
+  IsString,
+  MaxLength,
 } from "class-validator";
-import { AnalysisReportUpdateManyWithoutCoinsInput } from "./AnalysisReportUpdateManyWithoutCoinsInput";
 import { Type } from "class-transformer";
-import { TransactionUpdateManyWithoutCoinsInput } from "./TransactionUpdateManyWithoutCoinsInput";
 import { MarketDataUpdateManyWithoutCoinsInput } from "./MarketDataUpdateManyWithoutCoinsInput";
+import { TransactionUpdateManyWithoutCoinsInput } from "./TransactionUpdateManyWithoutCoinsInput";
 
 @InputType()
 class CoinUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: () => AnalysisReportUpdateManyWithoutCoinsInput,
+  })
+  @ValidateNested()
+  @Type(() => AnalysisReportUpdateManyWithoutCoinsInput)
+  @IsOptional()
+  @Field(() => AnalysisReportUpdateManyWithoutCoinsInput, {
+    nullable: true,
+  })
+  analysisReports?: AnalysisReportUpdateManyWithoutCoinsInput;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @Max(99999999999)
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  currency?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  description?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => MarketDataUpdateManyWithoutCoinsInput,
+  })
+  @ValidateNested()
+  @Type(() => MarketDataUpdateManyWithoutCoinsInput)
+  @IsOptional()
+  @Field(() => MarketDataUpdateManyWithoutCoinsInput, {
+    nullable: true,
+  })
+  marketDataItems?: MarketDataUpdateManyWithoutCoinsInput;
+
   @ApiProperty({
     required: false,
     type: String,
@@ -52,30 +100,6 @@ class CoinUpdateInput {
 
   @ApiProperty({
     required: false,
-    type: String,
-  })
-  @IsString()
-  @MaxLength(1000)
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  description?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => AnalysisReportUpdateManyWithoutCoinsInput,
-  })
-  @ValidateNested()
-  @Type(() => AnalysisReportUpdateManyWithoutCoinsInput)
-  @IsOptional()
-  @Field(() => AnalysisReportUpdateManyWithoutCoinsInput, {
-    nullable: true,
-  })
-  analysisReports?: AnalysisReportUpdateManyWithoutCoinsInput;
-
-  @ApiProperty({
-    required: false,
     type: () => TransactionUpdateManyWithoutCoinsInput,
   })
   @ValidateNested()
@@ -85,30 +109,6 @@ class CoinUpdateInput {
     nullable: true,
   })
   transactions?: TransactionUpdateManyWithoutCoinsInput;
-
-  @ApiProperty({
-    required: false,
-    type: () => MarketDataUpdateManyWithoutCoinsInput,
-  })
-  @ValidateNested()
-  @Type(() => MarketDataUpdateManyWithoutCoinsInput)
-  @IsOptional()
-  @Field(() => MarketDataUpdateManyWithoutCoinsInput, {
-    nullable: true,
-  })
-  marketDataItems?: MarketDataUpdateManyWithoutCoinsInput;
-
-  @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsInt()
-  @Max(99999999999)
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  currency?: number | null;
 }
 
 export { CoinUpdateInput as CoinUpdateInput };

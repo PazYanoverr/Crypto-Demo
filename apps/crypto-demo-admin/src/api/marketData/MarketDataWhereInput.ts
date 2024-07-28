@@ -1,14 +1,14 @@
+import { CoinWhereUniqueInput } from "../coin/CoinWhereUniqueInput";
 import { StringFilter } from "../../util/StringFilter";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
-import { CoinWhereUniqueInput } from "../coin/CoinWhereUniqueInput";
 
 export type MarketDataWhereInput = {
+  coin?: CoinWhereUniqueInput;
   id?: StringFilter;
   marketCap?: FloatNullableFilter;
-  timestamp?: DateTimeNullableFilter;
   price?: FloatNullableFilter;
+  timestamp?: DateTimeNullableFilter;
   volume?: IntNullableFilter;
-  coin?: CoinWhereUniqueInput;
 };

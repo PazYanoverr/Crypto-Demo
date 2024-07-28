@@ -11,20 +11,32 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { CoinWhereUniqueInput } from "../../coin/base/CoinWhereUniqueInput";
 import {
+  ValidateNested,
+  IsOptional,
   IsNumber,
   Min,
   Max,
-  IsOptional,
   IsDate,
   IsInt,
-  ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { CoinWhereUniqueInput } from "../../coin/base/CoinWhereUniqueInput";
 
 @InputType()
 class MarketDataUpdateInput {
+  @ApiProperty({
+    required: false,
+    type: () => CoinWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => CoinWhereUniqueInput)
+  @IsOptional()
+  @Field(() => CoinWhereUniqueInput, {
+    nullable: true,
+  })
+  coin?: CoinWhereUniqueInput | null;
+
   @ApiProperty({
     required: false,
     type: Number,
@@ -37,17 +49,6 @@ class MarketDataUpdateInput {
     nullable: true,
   })
   marketCap?: number | null;
-
-  @ApiProperty({
-    required: false,
-  })
-  @IsDate()
-  @Type(() => Date)
-  @IsOptional()
-  @Field(() => Date, {
-    nullable: true,
-  })
-  timestamp?: Date | null;
 
   @ApiProperty({
     required: false,
@@ -64,6 +65,17 @@ class MarketDataUpdateInput {
 
   @ApiProperty({
     required: false,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @IsOptional()
+  @Field(() => Date, {
+    nullable: true,
+  })
+  timestamp?: Date | null;
+
+  @ApiProperty({
+    required: false,
     type: Number,
   })
   @IsInt()
@@ -74,18 +86,6 @@ class MarketDataUpdateInput {
     nullable: true,
   })
   volume?: number | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => CoinWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => CoinWhereUniqueInput)
-  @IsOptional()
-  @Field(() => CoinWhereUniqueInput, {
-    nullable: true,
-  })
-  coin?: CoinWhereUniqueInput | null;
 }
 
 export { MarketDataUpdateInput as MarketDataUpdateInput };

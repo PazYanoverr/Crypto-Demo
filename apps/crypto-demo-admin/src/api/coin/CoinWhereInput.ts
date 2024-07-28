@@ -1,17 +1,17 @@
-import { StringFilter } from "../../util/StringFilter";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { AnalysisReportListRelationFilter } from "../analysisReport/AnalysisReportListRelationFilter";
-import { TransactionListRelationFilter } from "../transaction/TransactionListRelationFilter";
-import { MarketDataListRelationFilter } from "../marketData/MarketDataListRelationFilter";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { StringFilter } from "../../util/StringFilter";
+import { MarketDataListRelationFilter } from "../marketData/MarketDataListRelationFilter";
+import { TransactionListRelationFilter } from "../transaction/TransactionListRelationFilter";
 
 export type CoinWhereInput = {
+  analysisReports?: AnalysisReportListRelationFilter;
+  currency?: IntNullableFilter;
+  description?: StringNullableFilter;
   id?: StringFilter;
+  marketDataItems?: MarketDataListRelationFilter;
   name?: StringNullableFilter;
   symbolField?: StringNullableFilter;
-  description?: StringNullableFilter;
-  analysisReports?: AnalysisReportListRelationFilter;
   transactions?: TransactionListRelationFilter;
-  marketDataItems?: MarketDataListRelationFilter;
-  currency?: IntNullableFilter;
 };

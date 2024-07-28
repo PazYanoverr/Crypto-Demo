@@ -4,10 +4,10 @@ import {
   Create,
   SimpleForm,
   CreateProps,
-  NumberInput,
-  DateTimeInput,
   ReferenceInput,
   SelectInput,
+  NumberInput,
+  DateTimeInput,
 } from "react-admin";
 
 import { CoinTitle } from "../coin/CoinTitle";
@@ -16,13 +16,13 @@ export const MarketDataCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <NumberInput label="marketCap" source="marketCap" />
-        <DateTimeInput label="timestamp" source="timestamp" />
-        <NumberInput label="price" source="price" />
-        <NumberInput step={1} label="volume" source="volume" />
         <ReferenceInput source="coin.id" reference="Coin" label="coin">
           <SelectInput optionText={CoinTitle} />
         </ReferenceInput>
+        <NumberInput label="marketCap" source="marketCap" />
+        <NumberInput label="price" source="price" />
+        <DateTimeInput label="timestamp" source="timestamp" />
+        <NumberInput step={1} label="volume" source="volume" />
       </SimpleForm>
     </Create>
   );

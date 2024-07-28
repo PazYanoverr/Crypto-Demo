@@ -1,11 +1,11 @@
 import { SortOrder } from "../../util/SortOrder";
 
 export type CoinOrderByInput = {
-  id?: SortOrder;
   createdAt?: SortOrder;
-  updatedAt?: SortOrder;
+  currency?: SortOrder;
+  description?: SortOrder;
+  id?: SortOrder;
   name?: SortOrder;
   symbolField?: SortOrder;
-  description?: SortOrder;
-  currency?: SortOrder;
+  updatedAt?: SortOrder;
 };

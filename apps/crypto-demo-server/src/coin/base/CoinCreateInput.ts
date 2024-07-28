@@ -11,21 +11,69 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
+import { AnalysisReportCreateNestedManyWithoutCoinsInput } from "./AnalysisReportCreateNestedManyWithoutCoinsInput";
 import {
-  IsString,
-  MaxLength,
-  IsOptional,
   ValidateNested,
+  IsOptional,
   IsInt,
   Max,
+  IsString,
+  MaxLength,
 } from "class-validator";
-import { AnalysisReportCreateNestedManyWithoutCoinsInput } from "./AnalysisReportCreateNestedManyWithoutCoinsInput";
 import { Type } from "class-transformer";
-import { TransactionCreateNestedManyWithoutCoinsInput } from "./TransactionCreateNestedManyWithoutCoinsInput";
 import { MarketDataCreateNestedManyWithoutCoinsInput } from "./MarketDataCreateNestedManyWithoutCoinsInput";
+import { TransactionCreateNestedManyWithoutCoinsInput } from "./TransactionCreateNestedManyWithoutCoinsInput";
 
 @InputType()
 class CoinCreateInput {
+  @ApiProperty({
+    required: false,
+    type: () => AnalysisReportCreateNestedManyWithoutCoinsInput,
+  })
+  @ValidateNested()
+  @Type(() => AnalysisReportCreateNestedManyWithoutCoinsInput)
+  @IsOptional()
+  @Field(() => AnalysisReportCreateNestedManyWithoutCoinsInput, {
+    nullable: true,
+  })
+  analysisReports?: AnalysisReportCreateNestedManyWithoutCoinsInput;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+  })
+  @IsInt()
+  @Max(99999999999)
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  currency?: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  description?: string | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => MarketDataCreateNestedManyWithoutCoinsInput,
+  })
+  @ValidateNested()
+  @Type(() => MarketDataCreateNestedManyWithoutCoinsInput)
+  @IsOptional()
+  @Field(() => MarketDataCreateNestedManyWithoutCoinsInput, {
+    nullable: true,
+  })
+  marketDataItems?: MarketDataCreateNestedManyWithoutCoinsInput;
+
   @ApiProperty({
     required: false,
     type: String,
@@ -52,30 +100,6 @@ class CoinCreateInput {
 
   @ApiProperty({
     required: false,
-    type: String,
-  })
-  @IsString()
-  @MaxLength(1000)
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  description?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => AnalysisReportCreateNestedManyWithoutCoinsInput,
-  })
-  @ValidateNested()
-  @Type(() => AnalysisReportCreateNestedManyWithoutCoinsInput)
-  @IsOptional()
-  @Field(() => AnalysisReportCreateNestedManyWithoutCoinsInput, {
-    nullable: true,
-  })
-  analysisReports?: AnalysisReportCreateNestedManyWithoutCoinsInput;
-
-  @ApiProperty({
-    required: false,
     type: () => TransactionCreateNestedManyWithoutCoinsInput,
   })
   @ValidateNested()
@@ -85,30 +109,6 @@ class CoinCreateInput {
     nullable: true,
   })
   transactions?: TransactionCreateNestedManyWithoutCoinsInput;
-
-  @ApiProperty({
-    required: false,
-    type: () => MarketDataCreateNestedManyWithoutCoinsInput,
-  })
-  @ValidateNested()
-  @Type(() => MarketDataCreateNestedManyWithoutCoinsInput)
-  @IsOptional()
-  @Field(() => MarketDataCreateNestedManyWithoutCoinsInput, {
-    nullable: true,
-  })
-  marketDataItems?: MarketDataCreateNestedManyWithoutCoinsInput;
-
-  @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsInt()
-  @Max(99999999999)
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  currency?: number | null;
 }
 
 export { CoinCreateInput as CoinCreateInput };

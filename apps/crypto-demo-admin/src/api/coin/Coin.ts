@@ -1,16 +1,16 @@
 import { AnalysisReport } from "../analysisReport/AnalysisReport";
-import { Transaction } from "../transaction/Transaction";
 import { MarketData } from "../marketData/MarketData";
+import { Transaction } from "../transaction/Transaction";
 
 export type Coin = {
-  id: string;
+  analysisReports?: Array<AnalysisReport>;
   createdAt: Date;
-  updatedAt: Date;
+  currency: number | null;
+  description: string | null;
+  id: string;
+  marketDataItems?: Array<MarketData>;
   name: string | null;
   symbolField: string | null;
-  description: string | null;
-  analysisReports?: Array<AnalysisReport>;
   transactions?: Array<Transaction>;
-  marketDataItems?: Array<MarketData>;
-  currency: number | null;
+  updatedAt: Date;
 };

@@ -41,19 +41,19 @@ export class MarketDataControllerBase {
           : undefined,
       },
       select: {
-        id: true,
-        createdAt: true,
-        updatedAt: true,
-        marketCap: true,
-        timestamp: true,
-        price: true,
-        volume: true,
-
         coin: {
           select: {
             id: true,
           },
         },
+
+        createdAt: true,
+        id: true,
+        marketCap: true,
+        price: true,
+        timestamp: true,
+        updatedAt: true,
+        volume: true,
       },
     });
   }
@@ -66,19 +66,19 @@ export class MarketDataControllerBase {
     return this.service.marketDataItems({
       ...args,
       select: {
-        id: true,
-        createdAt: true,
-        updatedAt: true,
-        marketCap: true,
-        timestamp: true,
-        price: true,
-        volume: true,
-
         coin: {
           select: {
             id: true,
           },
         },
+
+        createdAt: true,
+        id: true,
+        marketCap: true,
+        price: true,
+        timestamp: true,
+        updatedAt: true,
+        volume: true,
       },
     });
   }
@@ -92,19 +92,19 @@ export class MarketDataControllerBase {
     const result = await this.service.marketData({
       where: params,
       select: {
-        id: true,
-        createdAt: true,
-        updatedAt: true,
-        marketCap: true,
-        timestamp: true,
-        price: true,
-        volume: true,
-
         coin: {
           select: {
             id: true,
           },
         },
+
+        createdAt: true,
+        id: true,
+        marketCap: true,
+        price: true,
+        timestamp: true,
+        updatedAt: true,
+        volume: true,
       },
     });
     if (result === null) {
@@ -135,19 +135,19 @@ export class MarketDataControllerBase {
             : undefined,
         },
         select: {
-          id: true,
-          createdAt: true,
-          updatedAt: true,
-          marketCap: true,
-          timestamp: true,
-          price: true,
-          volume: true,
-
           coin: {
             select: {
               id: true,
             },
           },
+
+          createdAt: true,
+          id: true,
+          marketCap: true,
+          price: true,
+          timestamp: true,
+          updatedAt: true,
+          volume: true,
         },
       });
     } catch (error) {
@@ -170,19 +170,19 @@ export class MarketDataControllerBase {
       return await this.service.deleteMarketData({
         where: params,
         select: {
-          id: true,
-          createdAt: true,
-          updatedAt: true,
-          marketCap: true,
-          timestamp: true,
-          price: true,
-          volume: true,
-
           coin: {
             select: {
               id: true,
             },
           },
+
+          createdAt: true,
+          id: true,
+          marketCap: true,
+          price: true,
+          timestamp: true,
+          updatedAt: true,
+          volume: true,
         },
       });
     } catch (error) {

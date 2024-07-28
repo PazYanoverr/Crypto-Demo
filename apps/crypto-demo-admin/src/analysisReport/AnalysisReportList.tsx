@@ -4,8 +4,8 @@ import {
   Datagrid,
   ListProps,
   TextField,
-  DateField,
   ReferenceField,
+  DateField,
 } from "react-admin";
 import Pagination from "../Components/Pagination";
 import { COIN_TITLE_FIELD } from "../coin/CoinTitle";
@@ -20,15 +20,15 @@ export const AnalysisReportList = (props: ListProps): React.ReactElement => {
       pagination={<Pagination />}
     >
       <Datagrid rowClick="show">
-        <TextField label="ID" source="id" />
-        <DateField source="createdAt" label="Created At" />
-        <DateField source="updatedAt" label="Updated At" />
         <TextField label="analyst" source="analyst" />
-        <TextField label="createdOn" source="createdOn" />
-        <TextField label="report" source="report" />
         <ReferenceField label="coin" source="coin.id" reference="Coin">
           <TextField source={COIN_TITLE_FIELD} />
         </ReferenceField>
+        <DateField source="createdAt" label="Created At" />
+        <TextField label="createdOn" source="createdOn" />
+        <TextField label="ID" source="id" />
+        <TextField label="report" source="report" />
+        <DateField source="updatedAt" label="Updated At" />
       </Datagrid>
     </List>
   );

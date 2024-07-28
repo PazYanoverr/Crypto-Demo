@@ -11,16 +11,28 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringFilter } from "../../util/StringFilter";
+import { CoinWhereUniqueInput } from "../../coin/base/CoinWhereUniqueInput";
+import { ValidateNested, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { IsOptional, ValidateNested } from "class-validator";
+import { StringFilter } from "../../util/StringFilter";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
-import { CoinWhereUniqueInput } from "../../coin/base/CoinWhereUniqueInput";
 
 @InputType()
 class MarketDataWhereInput {
+  @ApiProperty({
+    required: false,
+    type: () => CoinWhereUniqueInput,
+  })
+  @ValidateNested()
+  @Type(() => CoinWhereUniqueInput)
+  @IsOptional()
+  @Field(() => CoinWhereUniqueInput, {
+    nullable: true,
+  })
+  coin?: CoinWhereUniqueInput;
+
   @ApiProperty({
     required: false,
     type: StringFilter,
@@ -45,17 +57,6 @@ class MarketDataWhereInput {
 
   @ApiProperty({
     required: false,
-    type: DateTimeNullableFilter,
-  })
-  @Type(() => DateTimeNullableFilter)
-  @IsOptional()
-  @Field(() => DateTimeNullableFilter, {
-    nullable: true,
-  })
-  timestamp?: DateTimeNullableFilter;
-
-  @ApiProperty({
-    required: false,
     type: FloatNullableFilter,
   })
   @Type(() => FloatNullableFilter)
@@ -67,6 +68,17 @@ class MarketDataWhereInput {
 
   @ApiProperty({
     required: false,
+    type: DateTimeNullableFilter,
+  })
+  @Type(() => DateTimeNullableFilter)
+  @IsOptional()
+  @Field(() => DateTimeNullableFilter, {
+    nullable: true,
+  })
+  timestamp?: DateTimeNullableFilter;
+
+  @ApiProperty({
+    required: false,
     type: IntNullableFilter,
   })
   @Type(() => IntNullableFilter)
@@ -75,18 +87,6 @@ class MarketDataWhereInput {
     nullable: true,
   })
   volume?: IntNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => CoinWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => CoinWhereUniqueInput)
-  @IsOptional()
-  @Field(() => CoinWhereUniqueInput, {
-    nullable: true,
-  })
-  coin?: CoinWhereUniqueInput;
 }
 
 export { MarketDataWhereInput as MarketDataWhereInput };
