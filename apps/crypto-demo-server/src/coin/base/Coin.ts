@@ -18,10 +18,8 @@ import {
   IsOptional,
   IsString,
   MaxLength,
-  ValidateNested,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { Transaction } from "../../transaction/base/Transaction";
 
 @ObjectType()
 class Coin {
@@ -88,15 +86,6 @@ class Coin {
     nullable: true,
   })
   symbolField!: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Transaction],
-  })
-  @ValidateNested()
-  @Type(() => Transaction)
-  @IsOptional()
-  transactions?: Array<Transaction>;
 
   @ApiProperty({
     required: true,

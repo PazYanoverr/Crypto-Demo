@@ -20,8 +20,6 @@ import { CoinFindUniqueArgs } from "./CoinFindUniqueArgs";
 import { CreateCoinArgs } from "./CreateCoinArgs";
 import { UpdateCoinArgs } from "./UpdateCoinArgs";
 import { DeleteCoinArgs } from "./DeleteCoinArgs";
-import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
-import { Transaction } from "../../transaction/base/Transaction";
 import { CoinService } from "../coin.service";
 @graphql.Resolver(() => Coin)
 export class CoinResolverBase {
@@ -87,20 +85,6 @@ export class CoinResolverBase {
       }
       throw error;
     }
-  }
-
-  @graphql.ResolveField(() => [Transaction], { name: "transactions" })
-  async findTransactions(
-    @graphql.Parent() parent: Coin,
-    @graphql.Args() args: TransactionFindManyArgs
-  ): Promise<Transaction[]> {
-    const results = await this.service.findTransactions(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
   }
 
   @graphql.Query(() => String)

@@ -13,8 +13,7 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { Type } from "class-transformer";
-import { IsOptional, ValidateNested } from "class-validator";
-import { CoinWhereUniqueInput } from "../../coin/base/CoinWhereUniqueInput";
+import { IsOptional } from "class-validator";
 import { StringFilter } from "../../util/StringFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
@@ -31,18 +30,6 @@ class TransactionWhereInput {
     nullable: true,
   })
   amount?: FloatNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => CoinWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => CoinWhereUniqueInput)
-  @IsOptional()
-  @Field(() => CoinWhereUniqueInput, {
-    nullable: true,
-  })
-  coin?: CoinWhereUniqueInput;
 
   @ApiProperty({
     required: false,

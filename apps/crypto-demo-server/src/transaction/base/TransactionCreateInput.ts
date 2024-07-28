@@ -11,19 +11,15 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-
 import {
   IsNumber,
   Min,
   Max,
   IsOptional,
-  ValidateNested,
   IsDate,
   IsString,
   MaxLength,
 } from "class-validator";
-
-import { CoinWhereUniqueInput } from "../../coin/base/CoinWhereUniqueInput";
 import { Type } from "class-transformer";
 
 @InputType()
@@ -40,18 +36,6 @@ class TransactionCreateInput {
     nullable: true,
   })
   amount?: number | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => CoinWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => CoinWhereUniqueInput)
-  @IsOptional()
-  @Field(() => CoinWhereUniqueInput, {
-    nullable: true,
-  })
-  coin?: CoinWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,

@@ -7,24 +7,21 @@ generator client {
   provider = "prisma-client-js"
 }
 
-model Coin {
-  createdAt    DateTime      @default(now())
-  currency     Int?
-  description  String?
-  id           String        @id @default(cuid())
-  name         String?
-  symbolField  String?
-  transactions Transaction[]
-  updatedAt    DateTime      @updatedAt
-}
-
 model Transaction {
   amount          Float?
-  coin            Coin?     @relation(fields: [coinId], references: [id])
-  coinId          String?
   createdAt       DateTime  @default(now())
   id              String    @id @default(cuid())
   transactionDate DateTime?
   transactionType String?
   updatedAt       DateTime  @updatedAt
+}
+
+model Coin {
+  createdAt   DateTime @default(now())
+  currency    Int?
+  description String?
+  id          String   @id @default(cuid())
+  name        String?
+  symbolField String?
+  updatedAt   DateTime @updatedAt
 }

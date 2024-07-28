@@ -31,24 +31,9 @@ export class TransactionControllerBase {
     @common.Body() data: TransactionCreateInput
   ): Promise<Transaction> {
     return await this.service.createTransaction({
-      data: {
-        ...data,
-
-        coin: data.coin
-          ? {
-              connect: data.coin,
-            }
-          : undefined,
-      },
+      data: data,
       select: {
         amount: true,
-
-        coin: {
-          select: {
-            id: true,
-          },
-        },
-
         createdAt: true,
         id: true,
         transactionDate: true,
@@ -67,13 +52,6 @@ export class TransactionControllerBase {
       ...args,
       select: {
         amount: true,
-
-        coin: {
-          select: {
-            id: true,
-          },
-        },
-
         createdAt: true,
         id: true,
         transactionDate: true,
@@ -93,13 +71,6 @@ export class TransactionControllerBase {
       where: params,
       select: {
         amount: true,
-
-        coin: {
-          select: {
-            id: true,
-          },
-        },
-
         createdAt: true,
         id: true,
         transactionDate: true,
@@ -125,24 +96,9 @@ export class TransactionControllerBase {
     try {
       return await this.service.updateTransaction({
         where: params,
-        data: {
-          ...data,
-
-          coin: data.coin
-            ? {
-                connect: data.coin,
-              }
-            : undefined,
-        },
+        data: data,
         select: {
           amount: true,
-
-          coin: {
-            select: {
-              id: true,
-            },
-          },
-
           createdAt: true,
           id: true,
           transactionDate: true,
@@ -171,13 +127,6 @@ export class TransactionControllerBase {
         where: params,
         select: {
           amount: true,
-
-          coin: {
-            select: {
-              id: true,
-            },
-          },
-
           createdAt: true,
           id: true,
           transactionDate: true,

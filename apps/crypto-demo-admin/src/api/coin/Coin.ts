@@ -1,5 +1,3 @@
-import { Transaction } from "../transaction/Transaction";
-
 export type Coin = {
   createdAt: Date;
   currency: number | null;
@@ -7,6 +5,5 @@ export type Coin = {
   id: string;
   name: string | null;
   symbolField: string | null;
-  transactions?: Array<Transaction>;
   updatedAt: Date;
 };

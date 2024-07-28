@@ -11,19 +11,15 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-
 import {
   IsNumber,
   Min,
   Max,
   IsOptional,
-  ValidateNested,
   IsDate,
   IsString,
   MaxLength,
 } from "class-validator";
-
-import { Coin } from "../../coin/base/Coin";
 import { Type } from "class-transformer";
 
 @ObjectType()
@@ -40,15 +36,6 @@ class Transaction {
     nullable: true,
   })
   amount!: number | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => Coin,
-  })
-  @ValidateNested()
-  @Type(() => Coin)
-  @IsOptional()
-  coin?: Coin | null;
 
   @ApiProperty({
     required: true,

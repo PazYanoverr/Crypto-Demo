@@ -13,10 +13,9 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { Type } from "class-transformer";
-import { IsOptional, ValidateNested } from "class-validator";
+import { IsOptional } from "class-validator";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
-import { TransactionListRelationFilter } from "../../transaction/base/TransactionListRelationFilter";
 
 @InputType()
 class CoinWhereInput {
@@ -74,18 +73,6 @@ class CoinWhereInput {
     nullable: true,
   })
   symbolField?: StringNullableFilter;
-
-  @ApiProperty({
-    required: false,
-    type: () => TransactionListRelationFilter,
-  })
-  @ValidateNested()
-  @Type(() => TransactionListRelationFilter)
-  @IsOptional()
-  @Field(() => TransactionListRelationFilter, {
-    nullable: true,
-  })
-  transactions?: TransactionListRelationFilter;
 }
 
 export { CoinWhereInput as CoinWhereInput };

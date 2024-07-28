@@ -20,7 +20,6 @@ import { TransactionFindUniqueArgs } from "./TransactionFindUniqueArgs";
 import { CreateTransactionArgs } from "./CreateTransactionArgs";
 import { UpdateTransactionArgs } from "./UpdateTransactionArgs";
 import { DeleteTransactionArgs } from "./DeleteTransactionArgs";
-import { Coin } from "../../coin/base/Coin";
 import { TransactionService } from "../transaction.service";
 @graphql.Resolver(() => Transaction)
 export class TransactionResolverBase {
@@ -59,15 +58,7 @@ export class TransactionResolverBase {
   ): Promise<Transaction> {
     return await this.service.createTransaction({
       ...args,
-      data: {
-        ...args.data,
-
-        coin: args.data.coin
-          ? {
-              connect: args.data.coin,
-            }
-          : undefined,
-      },
+      data: args.data,
     });
   }
 
@@ -78,15 +69,7 @@ export class TransactionResolverBase {
     try {
       return await this.service.updateTransaction({
         ...args,
-        data: {
-          ...args.data,
-
-          coin: args.data.coin
-            ? {
-                connect: args.data.coin,
-              }
-            : undefined,
-        },
+        data: args.data,
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -112,18 +95,5 @@ export class TransactionResolverBase {
       }
       throw error;
     }
-  }
-
-  @graphql.ResolveField(() => Coin, {
-    nullable: true,
-    name: "coin",
-  })
-  async getCoin(@graphql.Parent() parent: Transaction): Promise<Coin | null> {
-    const result = await this.service.getCoin(parent.id);
-
-    if (!result) {
-      return null;
-    }
-    return result;
   }
 }

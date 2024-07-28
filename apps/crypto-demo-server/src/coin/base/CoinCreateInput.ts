@@ -11,16 +11,7 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import {
-  IsInt,
-  Max,
-  IsOptional,
-  IsString,
-  MaxLength,
-  ValidateNested,
-} from "class-validator";
-import { TransactionCreateNestedManyWithoutCoinsInput } from "./TransactionCreateNestedManyWithoutCoinsInput";
-import { Type } from "class-transformer";
+import { IsInt, Max, IsOptional, IsString, MaxLength } from "class-validator";
 
 @InputType()
 class CoinCreateInput {
@@ -71,18 +62,6 @@ class CoinCreateInput {
     nullable: true,
   })
   symbolField?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => TransactionCreateNestedManyWithoutCoinsInput,
-  })
-  @ValidateNested()
-  @Type(() => TransactionCreateNestedManyWithoutCoinsInput)
-  @IsOptional()
-  @Field(() => TransactionCreateNestedManyWithoutCoinsInput, {
-    nullable: true,
-  })
-  transactions?: TransactionCreateNestedManyWithoutCoinsInput;
 }
 
 export { CoinCreateInput as CoinCreateInput };

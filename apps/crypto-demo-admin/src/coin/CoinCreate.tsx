@@ -1,16 +1,11 @@
 import * as React from "react";
-
 import {
   Create,
   SimpleForm,
   CreateProps,
   NumberInput,
   TextInput,
-  ReferenceArrayInput,
-  SelectArrayInput,
 } from "react-admin";
-
-import { TransactionTitle } from "../transaction/TransactionTitle";
 
 export const CoinCreate = (props: CreateProps): React.ReactElement => {
   return (
@@ -20,14 +15,6 @@ export const CoinCreate = (props: CreateProps): React.ReactElement => {
         <TextInput label="description" multiline source="description" />
         <TextInput label="name" source="name" />
         <TextInput label="symbol" source="symbolField" />
-        <ReferenceArrayInput
-          source="transactions"
-          reference="Transaction"
-          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
-          format={(value: any) => value && value.map((v: any) => v.id)}
-        >
-          <SelectArrayInput optionText={TransactionTitle} />
-        </ReferenceArrayInput>
       </SimpleForm>
     </Create>
   );
