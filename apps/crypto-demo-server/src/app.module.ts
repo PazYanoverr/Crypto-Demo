@@ -1,8 +1,6 @@
 import { Module } from "@nestjs/common";
-import { CoinModule } from "./coin/coin.module";
 import { TransactionModule } from "./transaction/transaction.module";
-import { MarketDataModule } from "./marketData/marketData.module";
-import { AnalysisReportModule } from "./analysisReport/analysisReport.module";
+import { CoinModule } from "./coin/coin.module";
 import { HealthModule } from "./health/health.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { SecretsManagerModule } from "./providers/secrets/secretsManager.module";
@@ -17,10 +15,8 @@ import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
   controllers: [],
   imports: [
     KafkaModule,
-    CoinModule,
     TransactionModule,
-    MarketDataModule,
-    AnalysisReportModule,
+    CoinModule,
     HealthModule,
     PrismaModule,
     SecretsManagerModule,

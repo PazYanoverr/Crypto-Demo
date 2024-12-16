@@ -31,28 +31,14 @@ export class TransactionControllerBase {
     @common.Body() data: TransactionCreateInput
   ): Promise<Transaction> {
     return await this.service.createTransaction({
-      data: {
-        ...data,
-
-        coin: data.coin
-          ? {
-              connect: data.coin,
-            }
-          : undefined,
-      },
+      data: data,
       select: {
-        id: true,
-        createdAt: true,
-        updatedAt: true,
         amount: true,
-        transactionType: true,
+        createdAt: true,
+        id: true,
         transactionDate: true,
-
-        coin: {
-          select: {
-            id: true,
-          },
-        },
+        transactionType: true,
+        updatedAt: true,
       },
     });
   }
@@ -65,18 +51,12 @@ export class TransactionControllerBase {
     return this.service.transactions({
       ...args,
       select: {
-        id: true,
-        createdAt: true,
-        updatedAt: true,
         amount: true,
-        transactionType: true,
+        createdAt: true,
+        id: true,
         transactionDate: true,
-
-        coin: {
-          select: {
-            id: true,
-          },
-        },
+        transactionType: true,
+        updatedAt: true,
       },
     });
   }
@@ -90,18 +70,12 @@ export class TransactionControllerBase {
     const result = await this.service.transaction({
       where: params,
       select: {
-        id: true,
-        createdAt: true,
-        updatedAt: true,
         amount: true,
-        transactionType: true,
+        createdAt: true,
+        id: true,
         transactionDate: true,
-
-        coin: {
-          select: {
-            id: true,
-          },
-        },
+        transactionType: true,
+        updatedAt: true,
       },
     });
     if (result === null) {
@@ -122,28 +96,14 @@ export class TransactionControllerBase {
     try {
       return await this.service.updateTransaction({
         where: params,
-        data: {
-          ...data,
-
-          coin: data.coin
-            ? {
-                connect: data.coin,
-              }
-            : undefined,
-        },
+        data: data,
         select: {
-          id: true,
-          createdAt: true,
-          updatedAt: true,
           amount: true,
-          transactionType: true,
+          createdAt: true,
+          id: true,
           transactionDate: true,
-
-          coin: {
-            select: {
-              id: true,
-            },
-          },
+          transactionType: true,
+          updatedAt: true,
         },
       });
     } catch (error) {
@@ -166,18 +126,12 @@ export class TransactionControllerBase {
       return await this.service.deleteTransaction({
         where: params,
         select: {
-          id: true,
-          createdAt: true,
-          updatedAt: true,
           amount: true,
-          transactionType: true,
+          createdAt: true,
+          id: true,
           transactionDate: true,
-
-          coin: {
-            select: {
-              id: true,
-            },
-          },
+          transactionType: true,
+          updatedAt: true,
         },
       });
     } catch (error) {

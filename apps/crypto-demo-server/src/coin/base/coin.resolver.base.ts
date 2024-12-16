@@ -20,12 +20,6 @@ import { CoinFindUniqueArgs } from "./CoinFindUniqueArgs";
 import { CreateCoinArgs } from "./CreateCoinArgs";
 import { UpdateCoinArgs } from "./UpdateCoinArgs";
 import { DeleteCoinArgs } from "./DeleteCoinArgs";
-import { AnalysisReportFindManyArgs } from "../../analysisReport/base/AnalysisReportFindManyArgs";
-import { AnalysisReport } from "../../analysisReport/base/AnalysisReport";
-import { TransactionFindManyArgs } from "../../transaction/base/TransactionFindManyArgs";
-import { Transaction } from "../../transaction/base/Transaction";
-import { MarketDataFindManyArgs } from "../../marketData/base/MarketDataFindManyArgs";
-import { MarketData } from "../../marketData/base/MarketData";
 import { CoinService } from "../coin.service";
 @graphql.Resolver(() => Coin)
 export class CoinResolverBase {
@@ -93,51 +87,9 @@ export class CoinResolverBase {
     }
   }
 
-  @graphql.ResolveField(() => [AnalysisReport], { name: "analysisReports" })
-  async findAnalysisReports(
-    @graphql.Parent() parent: Coin,
-    @graphql.Args() args: AnalysisReportFindManyArgs
-  ): Promise<AnalysisReport[]> {
-    const results = await this.service.findAnalysisReports(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
-  }
-
-  @graphql.ResolveField(() => [Transaction], { name: "transactions" })
-  async findTransactions(
-    @graphql.Parent() parent: Coin,
-    @graphql.Args() args: TransactionFindManyArgs
-  ): Promise<Transaction[]> {
-    const results = await this.service.findTransactions(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
-  }
-
-  @graphql.ResolveField(() => [MarketData], { name: "marketDataItems" })
-  async findMarketDataItems(
-    @graphql.Parent() parent: Coin,
-    @graphql.Args() args: MarketDataFindManyArgs
-  ): Promise<MarketData[]> {
-    const results = await this.service.findMarketDataItems(parent.id, args);
-
-    if (!results) {
-      return [];
-    }
-
-    return results;
-  }
-
   @graphql.Query(() => String)
   async GetTotalCoinValue(
-    @graphql.Args()
+    @graphql.Args("args")
     args: string
   ): Promise<string> {
     return this.service.GetTotalCoinValue(args);

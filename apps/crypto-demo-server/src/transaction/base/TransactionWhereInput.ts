@@ -11,27 +11,15 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { StringFilter } from "../../util/StringFilter";
-import { Type } from "class-transformer";
-import { IsOptional, ValidateNested } from "class-validator";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { Type } from "class-transformer";
+import { IsOptional } from "class-validator";
+import { StringFilter } from "../../util/StringFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
-import { CoinWhereUniqueInput } from "../../coin/base/CoinWhereUniqueInput";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 
 @InputType()
 class TransactionWhereInput {
-  @ApiProperty({
-    required: false,
-    type: StringFilter,
-  })
-  @Type(() => StringFilter)
-  @IsOptional()
-  @Field(() => StringFilter, {
-    nullable: true,
-  })
-  id?: StringFilter;
-
   @ApiProperty({
     required: false,
     type: FloatNullableFilter,
@@ -45,14 +33,14 @@ class TransactionWhereInput {
 
   @ApiProperty({
     required: false,
-    type: StringNullableFilter,
+    type: StringFilter,
   })
-  @Type(() => StringNullableFilter)
+  @Type(() => StringFilter)
   @IsOptional()
-  @Field(() => StringNullableFilter, {
+  @Field(() => StringFilter, {
     nullable: true,
   })
-  transactionType?: StringNullableFilter;
+  id?: StringFilter;
 
   @ApiProperty({
     required: false,
@@ -67,15 +55,14 @@ class TransactionWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => CoinWhereUniqueInput,
+    type: StringNullableFilter,
   })
-  @ValidateNested()
-  @Type(() => CoinWhereUniqueInput)
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => CoinWhereUniqueInput, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  coin?: CoinWhereUniqueInput;
+  transactionType?: StringNullableFilter;
 }
 
 export { TransactionWhereInput as TransactionWhereInput };

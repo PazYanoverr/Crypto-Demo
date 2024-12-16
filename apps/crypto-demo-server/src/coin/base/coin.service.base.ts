@@ -10,14 +10,7 @@ https://docs.amplication.com/how-to/custom-code
 ------------------------------------------------------------------------------
   */
 import { PrismaService } from "../../prisma/prisma.service";
-
-import {
-  Prisma,
-  Coin as PrismaCoin,
-  AnalysisReport as PrismaAnalysisReport,
-  Transaction as PrismaTransaction,
-  MarketData as PrismaMarketData,
-} from "@prisma/client";
+import { Prisma, Coin as PrismaCoin } from "@prisma/client";
 
 export class CoinServiceBase {
   constructor(protected readonly prisma: PrismaService) {}
@@ -40,39 +33,6 @@ export class CoinServiceBase {
   }
   async deleteCoin(args: Prisma.CoinDeleteArgs): Promise<PrismaCoin> {
     return this.prisma.coin.delete(args);
-  }
-
-  async findAnalysisReports(
-    parentId: string,
-    args: Prisma.AnalysisReportFindManyArgs
-  ): Promise<PrismaAnalysisReport[]> {
-    return this.prisma.coin
-      .findUniqueOrThrow({
-        where: { id: parentId },
-      })
-      .analysisReports(args);
-  }
-
-  async findTransactions(
-    parentId: string,
-    args: Prisma.TransactionFindManyArgs
-  ): Promise<PrismaTransaction[]> {
-    return this.prisma.coin
-      .findUniqueOrThrow({
-        where: { id: parentId },
-      })
-      .transactions(args);
-  }
-
-  async findMarketDataItems(
-    parentId: string,
-    args: Prisma.MarketDataFindManyArgs
-  ): Promise<PrismaMarketData[]> {
-    return this.prisma.coin
-      .findUniqueOrThrow({
-        where: { id: parentId },
-      })
-      .marketDataItems(args);
   }
   async GetTotalCoinValue(args: string): Promise<string> {
     throw new Error("Not implemented");

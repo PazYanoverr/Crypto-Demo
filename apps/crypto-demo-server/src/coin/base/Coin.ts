@@ -12,29 +12,17 @@ https://docs.amplication.com/how-to/custom-code
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import {
-  IsString,
   IsDate,
-  MaxLength,
-  IsOptional,
-  ValidateNested,
   IsInt,
   Max,
+  IsOptional,
+  IsString,
+  MaxLength,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { AnalysisReport } from "../../analysisReport/base/AnalysisReport";
-import { Transaction } from "../../transaction/base/Transaction";
-import { MarketData } from "../../marketData/base/MarketData";
 
 @ObjectType()
 class Coin {
-  @ApiProperty({
-    required: true,
-    type: String,
-  })
-  @IsString()
-  @Field(() => String)
-  id!: string;
-
   @ApiProperty({
     required: true,
   })
@@ -44,12 +32,36 @@ class Coin {
   createdAt!: Date;
 
   @ApiProperty({
-    required: true,
+    required: false,
+    type: Number,
   })
-  @IsDate()
-  @Type(() => Date)
-  @Field(() => Date)
-  updatedAt!: Date;
+  @IsInt()
+  @Max(99999999999)
+  @IsOptional()
+  @Field(() => Number, {
+    nullable: true,
+  })
+  currency!: number | null;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @MaxLength(1000)
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  description!: string | null;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  id!: string;
 
   @ApiProperty({
     required: false,
@@ -76,55 +88,12 @@ class Coin {
   symbolField!: string | null;
 
   @ApiProperty({
-    required: false,
-    type: String,
+    required: true,
   })
-  @IsString()
-  @MaxLength(1000)
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  description!: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => [AnalysisReport],
-  })
-  @ValidateNested()
-  @Type(() => AnalysisReport)
-  @IsOptional()
-  analysisReports?: Array<AnalysisReport>;
-
-  @ApiProperty({
-    required: false,
-    type: () => [Transaction],
-  })
-  @ValidateNested()
-  @Type(() => Transaction)
-  @IsOptional()
-  transactions?: Array<Transaction>;
-
-  @ApiProperty({
-    required: false,
-    type: () => [MarketData],
-  })
-  @ValidateNested()
-  @Type(() => MarketData)
-  @IsOptional()
-  marketDataItems?: Array<MarketData>;
-
-  @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsInt()
-  @Max(99999999999)
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  currency!: number | null;
+  @IsDate()
+  @Type(() => Date)
+  @Field(() => Date)
+  updatedAt!: Date;
 }
 
 export { Coin as Coin };

@@ -1,13 +1,11 @@
-import { StringFilter } from "../../util/StringFilter";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
-import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { StringFilter } from "../../util/StringFilter";
 import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
-import { CoinWhereUniqueInput } from "../coin/CoinWhereUniqueInput";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
 
 export type TransactionWhereInput = {
-  id?: StringFilter;
   amount?: FloatNullableFilter;
-  transactionType?: StringNullableFilter;
+  id?: StringFilter;
   transactionDate?: DateTimeNullableFilter;
-  coin?: CoinWhereUniqueInput;
+  transactionType?: StringNullableFilter;
 };
